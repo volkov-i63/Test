@@ -1,0 +1,32 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json",
+  "elmType": "button",
+  "customRowAction": {
+    "action": "executeFlow",
+    "actionParams": "='{' + if([$Status] == 'New','\"id\": \"FlowToMakeAssignmentID\", \"headerText\":\"Assign request to me\",\"runFlowButtonText\":\"Assign\"','\"id\": \"FlowToResolveID\", \"headerText\":\"Resolve this request\",\"runFlowButtonText\":\"Resolve\"') + '}'"
+  },
+  "attributes": {
+    "class": "ms-fontColor-themePrimary ms-fontColor-themeDarker--hover"
+  },
+  "style": {
+    "border": "none",
+    "background-color": "transparent",
+    "cursor": "pointer",
+    "visibility": "=if([$Status] == 'Approved','hidden',if([$Status] == 'Cancelled','hidden','visible'))"
+  },
+  "children": [
+    {
+      "elmType": "span",
+      "attributes": {
+        "iconName": "=if([$Status] == 'New','PinSolid12','SkypeCircleCheck'"
+      },
+      "style": {
+        "padding-right": "6px"
+      }
+    },
+    {
+      "elmType": "span",
+      "txtContent": "=if([$Status] == 'New','Assign to me','Resolve')"
+    }
+  ]
+}
